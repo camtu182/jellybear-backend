@@ -16,6 +16,7 @@ const getTotalPrice = async(products)=>{
         await strapi.entityService.update('api::product.product', +products[i].productId,  {
             data: {
                 in_stock: +entry.in_stock - +amount,
+                sold: +entry.sold + +amount
             }
         });
     }
@@ -33,6 +34,8 @@ module.exports = () => ({
                     user: user.id,
                     products: user.shoppingcart,
                     totalPrice: totalPrice,
+                    firstName: body.firstName,
+                    lastName: body.lastName,
                     address: body.address,
                     phone: body.phone,
                     publishedAt: new Date()

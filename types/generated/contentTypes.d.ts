@@ -502,6 +502,33 @@ export interface ApiOrderOrder extends Schema.CollectionType {
   };
 }
 
+export interface ApiPostPost extends Schema.CollectionType {
+  collectionName: 'posts';
+  info: {
+    description: '';
+    displayName: 'Post';
+    pluralName: 'posts';
+    singularName: 'post';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    author: Attribute.String;
+    content: Attribute.RichText;
+    create_at: Attribute.Date;
+    createdAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::post.post', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    image: Attribute.Media<'images', true>;
+    publishedAt: Attribute.DateTime;
+    title: Attribute.String;
+    updatedAt: Attribute.DateTime;
+    updatedBy: Attribute.Relation<'api::post.post', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
 export interface ApiProductProduct extends Schema.CollectionType {
   collectionName: 'products';
   info: {
@@ -983,6 +1010,7 @@ declare module '@strapi/types' {
       'api::category2.category2': ApiCategory2Category2;
       'api::collection.collection': ApiCollectionCollection;
       'api::order.order': ApiOrderOrder;
+      'api::post.post': ApiPostPost;
       'api::product.product': ApiProductProduct;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
